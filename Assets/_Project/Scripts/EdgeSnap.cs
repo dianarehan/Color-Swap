@@ -4,9 +4,9 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class EdgeSnap : MonoBehaviour
 {
-    public Transform pointA;
-    public Transform pointB;
-    public float lineWidth = 0.2f;
+    [SerializeField] private Transform pointA;
+    [SerializeField] private Transform pointB;
+    [SerializeField] private float lineWidth = 0.2f;
 
     private LineRenderer lineRenderer;
 

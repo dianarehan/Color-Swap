@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public int nodeIndex; 
-    public CircleColor currentColor;
-    public GameObject currentInnerCircle; 
+    [SerializeField] private int nodeIndex; 
+    [SerializeField] private CircleColor currentColor;
+    [SerializeField] private GameObject currentInnerCircle; 
 }

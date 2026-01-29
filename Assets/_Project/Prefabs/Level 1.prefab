@@ -454,7 +454,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7805458649380708272, guid: 99189bf5927bab140b91143e13c61918, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5899777701811851307}
   m_SourcePrefab: {fileID: 100100000, guid: 99189bf5927bab140b91143e13c61918, type: 3}
 --- !u!4 &1367152074964262977 stripped
 Transform:
@@ -466,6 +469,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7805458649380708272, guid: 99189bf5927bab140b91143e13c61918, type: 3}
   m_PrefabInstance: {fileID: 4102751162051197011}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5899777701811851307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106152361551964131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b068b1a6b1d4042a106eacd92c918b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableCircle
+  currentNode: {fileID: 3604966243162359758}
+  myColor: 0
 --- !u!1001 &5077009565729845936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,13 +538,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7805458649380708272, guid: 99189bf5927bab140b91143e13c61918, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4257513893628228156}
   m_SourcePrefab: {fileID: 100100000, guid: 99189bf5927bab140b91143e13c61918, type: 3}
 --- !u!1 &3037579011401198848 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7805458649380708272, guid: 99189bf5927bab140b91143e13c61918, type: 3}
   m_PrefabInstance: {fileID: 5077009565729845936}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4257513893628228156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3037579011401198848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b068b1a6b1d4042a106eacd92c918b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableCircle
+  currentNode: {fileID: 3154264526232557930}
+  myColor: 0
 --- !u!4 &7810322218907953826 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3032892738125109266, guid: 99189bf5927bab140b91143e13c61918, type: 3}
@@ -694,13 +728,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7805458649380708272, guid: 99189bf5927bab140b91143e13c61918, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7562759780304667022}
   m_SourcePrefab: {fileID: 100100000, guid: 99189bf5927bab140b91143e13c61918, type: 3}
 --- !u!1 &3515727106807457029 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7805458649380708272, guid: 99189bf5927bab140b91143e13c61918, type: 3}
   m_PrefabInstance: {fileID: 6672311977629334197}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7562759780304667022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515727106807457029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b068b1a6b1d4042a106eacd92c918b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableCircle
+  currentNode: {fileID: 7851663764020368688}
+  myColor: 2
 --- !u!4 &8542817787970658983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3032892738125109266, guid: 99189bf5927bab140b91143e13c61918, type: 3}
