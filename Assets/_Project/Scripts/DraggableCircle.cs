@@ -25,24 +25,42 @@ public class DraggableCircle : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         GetComponent<SpriteRenderer>().sortingOrder = 5;
 
-        LevelManager manager = FindObjectOfType<LevelManager>();
+        LevelManager manager = FindFirstObjectByType<LevelManager>();
 
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, 0.5f);
-        
-        if (hit != null && hit.TryGetComponent<Node>(out Node targetNode))
+        // Use OverlapCircleAll to detect the Node even if we are overlapping our own collider
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+        Node targetNode = null;
+
+        foreach (var hit in hits)
         {
+            // Ignore our own collider
+            if (hit.gameObject == this.gameObject) continue;
+
+            if (hit.TryGetComponent<Node>(out Node n))
+            {
+                targetNode = n;
+                break; // Found a node, stop looking
+            }
+        }
+        
+        if (targetNode != null)
+        {
+            Debug.Log("Target node found: " + targetNode.name);
             if (manager.IsConnected(currentNode, targetNode))
             {
                 PerformSwap(targetNode);
+                Debug.Log("Swap performed");
                 manager.CheckWinCondition();
             }
             else
             {
+                Debug.Log("Nodes are not connected");
                 ReturnToStart();
             }
         }
         else
         {
+            Debug.Log("No Node component found on overlapped objects. Did you add CircleCollider2D to your Nodes?");
             ReturnToStart();
         }
     }

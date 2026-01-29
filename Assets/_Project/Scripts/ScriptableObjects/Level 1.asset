@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   connections:
+  - nodeAIndex: 0
+    nodeBIndex: 1
   - nodeAIndex: 1
     nodeBIndex: 2
-  - nodeAIndex: 2
-    nodeBIndex: 3

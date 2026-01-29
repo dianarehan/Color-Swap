@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
-    public LevelData currentLevelData; 
-    public List<Node> allNodes; 
+    [SerializeField] private LevelData currentLevelData; 
+    [SerializeField] private List<Node> allNodes; 
     
     public bool isLevelComplete = false;
     
@@ -27,6 +27,12 @@ public class LevelManager : MonoBehaviour
 
         foreach (var connection in currentLevelData.connections)
         {
+            if (connection.nodeAIndex >= allNodes.Count || connection.nodeBIndex >= allNodes.Count)
+            {
+                Debug.LogError($"Level Data Error: Connection references node index {Mathf.Max(connection.nodeAIndex, connection.nodeBIndex)} but there are only {allNodes.Count} nodes in the list.");
+                return;
+            }
+
             Node nodeA = allNodes[connection.nodeAIndex];
             Node nodeB = allNodes[connection.nodeBIndex];
 
