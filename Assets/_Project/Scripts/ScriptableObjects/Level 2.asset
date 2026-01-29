@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 357ec4646a5eef448b056a7c3f376db2, type: 3}
-  m_Name: Level 1
+  m_Name: Level 2
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   connections:
   - nodeAIndex: 1
     nodeBIndex: 2
   - nodeAIndex: 2
     nodeBIndex: 3
+  - nodeAIndex: 3
+    nodeBIndex: 4
+  - nodeAIndex: 4
+    nodeBIndex: 1
