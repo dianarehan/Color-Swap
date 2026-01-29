@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {   
@@ -60,12 +61,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadPreviousLevel()
     {
-        if (currentLevelIndex > 0)
-        {
-            currentLevelIndex--;
-            InitializeLevel(currentLevelIndex);
-            UpdateUIState();
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void UpdateUIState()
