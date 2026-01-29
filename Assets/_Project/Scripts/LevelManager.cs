@@ -7,6 +7,20 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<Node> allNodes; 
     
     public bool isLevelComplete = false;
+
+    void Start()
+    {
+        if (allNodes != null)
+        {
+            for (int i = 0; i < allNodes.Count; i++)
+            {
+                if (allNodes[i] != null && allNodes[i].nodeIndex != i)
+                {
+                    Debug.LogError($"SETUP ERROR: Node at List Index {i} has `nodeIndex` {allNodes[i].nodeIndex}. They MUST match! Please re-number your Nodes or re-order the list.");
+                }
+            }
+        }
+    }
     
     public bool IsConnected(Node a, Node b)
     {
@@ -36,9 +50,9 @@ public class LevelManager : MonoBehaviour
             Node nodeA = allNodes[connection.nodeAIndex];
             Node nodeB = allNodes[connection.nodeBIndex];
 
-            // If any connected nodes share the same color, the player hasn't won yet
             if (nodeA.currentColor == nodeB.currentColor)
             {
+                Debug.Log($"Win Check Failed: Node {nodeA.nodeIndex} ({nodeA.currentColor}) and Node {nodeB.nodeIndex} ({nodeB.currentColor}) are connected and share the same color.");
                 return; 
             }
         }
@@ -49,6 +63,6 @@ public class LevelManager : MonoBehaviour
     private void OnWin()
     {
         isLevelComplete = true;
-        Debug.Log("Excellence!"); // We will trigger the UI panel here next
+        Debug.Log("Excellence!");
     }
 }

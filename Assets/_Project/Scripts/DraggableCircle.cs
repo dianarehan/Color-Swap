@@ -14,6 +14,18 @@ public class DraggableCircle : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         GetComponent<SpriteRenderer>().sortingOrder = 10; 
     }
 
+    void Start()
+    {
+        if (currentNode == null)
+            currentNode = GetComponentInParent<Node>();
+
+        if (currentNode != null)
+        {
+            currentNode.currentInnerCircle = this.gameObject;
+            currentNode.currentColor = myColor;
+        }
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(eventData.position);
@@ -27,19 +39,19 @@ public class DraggableCircle : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         LevelManager manager = FindFirstObjectByType<LevelManager>();
 
-        // Use OverlapCircleAll to detect the Node even if we are overlapping our own collider
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.5f);
         Node targetNode = null;
 
         foreach (var hit in hits)
         {
-            // Ignore our own collider
             if (hit.gameObject == this.gameObject) continue;
 
             if (hit.TryGetComponent<Node>(out Node n))
             {
+                if (n == currentNode) continue;
+
                 targetNode = n;
-                break; // Found a node, stop looking
+                break;
             }
         }
         
@@ -89,12 +101,27 @@ public class DraggableCircle : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
         else
         {
-            // If target was empty, old node is now empty
             oldNode.currentInnerCircle = null;
-            oldNode.currentColor = CircleColor.None; // Or whatever default
+            oldNode.currentColor = CircleColor.None;
         }
         
-        Debug.Log("PerformSwap finished updating references.");
+        this.transform.DOMove(targetNode.transform.position, 0.25f).SetEase(Ease.OutQuad);
+        this.currentNode = targetNode;
+        targetNode.currentInnerCircle = this.gameObject;
+        targetNode.currentColor = this.myColor;
+
+        if (otherCircle != null)
+        {
+            otherCircle.transform.DOMove(oldNode.transform.position, 0.25f).SetEase(Ease.OutQuad);
+            otherCircle.currentNode = oldNode;
+            oldNode.currentInnerCircle = otherCircle.gameObject;
+            oldNode.currentColor = otherCircle.myColor;
+        }
+        else
+        {
+            oldNode.currentInnerCircle = null;
+            oldNode.currentColor = CircleColor.None;
+        }
     }
 
     void ReturnToStart()
