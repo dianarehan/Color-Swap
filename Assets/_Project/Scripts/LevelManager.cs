@@ -2,29 +2,27 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
-{
-    [SerializeField] private LevelData currentLevelData; 
-    [SerializeField] private List<Node> allNodes; 
-    
-    public bool isLevelComplete = false;
+{   
+    [SerializeField] private int currentLevelIndex = 0;
+    [SerializeField] private LevelData[] levelDataArray; 
+    [SerializeField] private GameObject[] Levels;
+    bool isLevelComplete = false;
+    bool allLevelsCompleted = false;
+    private Node[] allNodesList; 
 
     void Start()
     {
-        if (allNodes != null)
-        {
-            for (int i = 0; i < allNodes.Count; i++)
-            {
-                if (allNodes[i] != null && allNodes[i].nodeIndex != i)
-                {
-                    Debug.LogError($"SETUP ERROR: Node at List Index {i} has `nodeIndex` {allNodes[i].nodeIndex}. They MUST match! Please re-number your Nodes or re-order the list.");
-                }
-            }
-        }
+        GetAllNodes();
     }
     
+    void GetAllNodes()
+    {
+        allNodesList = Levels[currentLevelIndex].GetComponentsInChildren<Node>();
+    }
+
     public bool IsConnected(Node a, Node b)
     {
-        foreach (var conn in currentLevelData.connections)
+        foreach (var conn in levelDataArray[currentLevelIndex].connections)
         {
             if ((conn.nodeAIndex == a.nodeIndex && conn.nodeBIndex == b.nodeIndex) ||
                 (conn.nodeAIndex == b.nodeIndex && conn.nodeBIndex == a.nodeIndex))
@@ -39,16 +37,16 @@ public class LevelManager : MonoBehaviour
     {
         if (isLevelComplete) return;
 
-        foreach (var connection in currentLevelData.connections)
+        foreach (var connection in levelDataArray[currentLevelIndex].connections)
         {
-            if (connection.nodeAIndex >= allNodes.Count || connection.nodeBIndex >= allNodes.Count)
+            if (connection.nodeAIndex >= allNodesList.Length || connection.nodeBIndex >= allNodesList.Length)
             {
-                Debug.LogError($"Level Data Error: Connection references node index {Mathf.Max(connection.nodeAIndex, connection.nodeBIndex)} but there are only {allNodes.Count} nodes in the list.");
+                Debug.LogError($"Level Data Error: Connection references node index {Mathf.Max(connection.nodeAIndex, connection.nodeBIndex)} but there are only {allNodesList.Length} nodes in the list.");
                 return;
             }
 
-            Node nodeA = allNodes[connection.nodeAIndex];
-            Node nodeB = allNodes[connection.nodeBIndex];
+            Node nodeA = allNodesList[connection.nodeAIndex];
+            Node nodeB = allNodesList[connection.nodeBIndex];
 
             if (nodeA.currentColor == nodeB.currentColor)
             {
@@ -64,5 +62,23 @@ public class LevelManager : MonoBehaviour
     {
         isLevelComplete = true;
         Debug.Log("Excellence!");
+        LoadNextLevel();
+    }
+
+    void LoadNextLevel()
+    {
+        if (allLevelsCompleted) return;
+        Levels[currentLevelIndex].SetActive(false);
+        currentLevelIndex++;
+        if (currentLevelIndex >= Levels.Length)
+        {
+            allLevelsCompleted = true;
+            Debug.Log("All levels completed!");
+            return;
+        }
+
+        Levels[currentLevelIndex].SetActive(true);
+        GetAllNodes();
+        isLevelComplete = false;
     }
 }
