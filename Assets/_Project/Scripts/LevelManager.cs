@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class LevelManager : MonoBehaviour
 {   
@@ -46,16 +47,17 @@ public class LevelManager : MonoBehaviour
     }
     
     public void LoadNextLevel()
-    {
+    {   
+        RectTransform rect = winPanel.GetComponent<RectTransform>();
+        if (rect != null)
+        {
+            rect.DOAnchorPosY(-2500, 0.5f).SetEase(Ease.OutBack);
+        }
         if (currentLevelIndex < Levels.Length - 1)
         {
             currentLevelIndex++;
             InitializeLevel(currentLevelIndex);
             UpdateUIState();
-        }
-        else
-        {
-            Debug.Log("Already at max level");
         }
     }
 
@@ -115,11 +117,16 @@ public class LevelManager : MonoBehaviour
         isLevelComplete = true;
         Debug.Log("Excellence!");
         
-        // Show Win Panel instead of auto-loading
         if (winPanel != null)
         {
             winPanel.SetActive(true);
-            UpdateUIState(); // Refresh buttons based on current level
+            UpdateUIState(); 
+            
+            RectTransform rect = winPanel.GetComponent<RectTransform>();
+            if (rect != null)
+            {
+                rect.DOAnchorPosY(0, 0.5f).SetEase(Ease.OutBack);
+            }
         }
     }
 }
