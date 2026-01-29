@@ -45,7 +45,8 @@ public class DraggableCircle : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         
         if (targetNode != null)
         {
-            Debug.Log("Target node found: " + targetNode.name);
+            Debug.Log($"Attempting connect: {currentNode.name} (Index {currentNode.nodeIndex}) -> {targetNode.name} (Index {targetNode.nodeIndex})");
+            
             if (manager.IsConnected(currentNode, targetNode))
             {
                 PerformSwap(targetNode);
@@ -54,7 +55,7 @@ public class DraggableCircle : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             }
             else
             {
-                Debug.Log("Nodes are not connected");
+                Debug.Log($"Connection Failed: No link found between {currentNode.nodeIndex} and {targetNode.nodeIndex} in LevelData.");
                 ReturnToStart();
             }
         }
@@ -67,7 +68,10 @@ public class DraggableCircle : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     void PerformSwap(Node targetNode)
     {
-        DraggableCircle otherCircle = targetNode.currentInnerCircle.GetComponent<DraggableCircle>();
+        Debug.Log($"PerformSwap entered: Moving from {currentNode.name} to {targetNode.name}");
+        
+        GameObject otherCircleObj = targetNode.currentInnerCircle;
+        DraggableCircle otherCircle = otherCircleObj != null ? otherCircleObj.GetComponent<DraggableCircle>() : null;
 
         Node oldNode = currentNode;
         
@@ -76,11 +80,21 @@ public class DraggableCircle : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         targetNode.currentInnerCircle = this.gameObject;
         targetNode.currentColor = this.myColor;
 
-        otherCircle.transform.DOMove(oldNode.transform.position, 0.25f).SetEase(Ease.OutQuad);
-        otherCircle.currentNode = oldNode;
-        oldNode.currentInnerCircle = otherCircle.gameObject;
-        oldNode.currentColor = otherCircle.myColor;
-
+        if (otherCircle != null)
+        {
+            otherCircle.transform.DOMove(oldNode.transform.position, 0.25f).SetEase(Ease.OutQuad);
+            otherCircle.currentNode = oldNode;
+            oldNode.currentInnerCircle = otherCircle.gameObject;
+            oldNode.currentColor = otherCircle.myColor;
+        }
+        else
+        {
+            // If target was empty, old node is now empty
+            oldNode.currentInnerCircle = null;
+            oldNode.currentColor = CircleColor.None; // Or whatever default
+        }
+        
+        Debug.Log("PerformSwap finished updating references.");
     }
 
     void ReturnToStart()

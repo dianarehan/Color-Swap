@@ -16,8 +16,16 @@ MonoBehaviour:
   - nodeAIndex: 0
     nodeBIndex: 1
   - nodeAIndex: 1
+    nodeBIndex: 0
+  - nodeAIndex: 1
     nodeBIndex: 2
+  - nodeAIndex: 2
+    nodeBIndex: 1
   - nodeAIndex: 2
     nodeBIndex: 3
   - nodeAIndex: 3
+    nodeBIndex: 2
+  - nodeAIndex: 3
     nodeBIndex: 0
+  - nodeAIndex: 0
+    nodeBIndex: 3

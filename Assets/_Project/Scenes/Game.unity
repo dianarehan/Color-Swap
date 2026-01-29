@@ -642,7 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded632ec887b37640967ef139d5add1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  currentLevelData: {fileID: 11400000, guid: 8c66583efe997224fbb981684871a8b5, type: 2}
+  currentLevelData: {fileID: 11400000, guid: bc8235aaba1478849bffa4ccdcc1fd2e, type: 2}
   allNodes:
   - {fileID: 3550236282770685496}
   - {fileID: 3550236282770685494}
@@ -768,10 +768,6 @@ PrefabInstance:
     - target: {fileID: 5320114041504682055, guid: 3f520a0dbe1568545be1f65c7594f281, type: 3}
       propertyPath: m_Name
       value: Level 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320114041504682055, guid: 3f520a0dbe1568545be1f65c7594f281, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5898529961374844772, guid: 3f520a0dbe1568545be1f65c7594f281, type: 3}
       propertyPath: m_LocalPosition.x
