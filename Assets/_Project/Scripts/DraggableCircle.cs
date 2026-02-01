@@ -104,24 +104,6 @@ public class DraggableCircle : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             oldNode.currentInnerCircle = null;
             oldNode.currentColor = CircleColor.None;
         }
-        
-        this.transform.DOMove(targetNode.transform.position, 0.25f).SetEase(Ease.OutQuad);
-        this.currentNode = targetNode;
-        targetNode.currentInnerCircle = this.gameObject;
-        targetNode.currentColor = this.myColor;
-
-        if (otherCircle != null)
-        {
-            otherCircle.transform.DOMove(oldNode.transform.position, 0.25f).SetEase(Ease.OutQuad);
-            otherCircle.currentNode = oldNode;
-            oldNode.currentInnerCircle = otherCircle.gameObject;
-            oldNode.currentColor = otherCircle.myColor;
-        }
-        else
-        {
-            oldNode.currentInnerCircle = null;
-            oldNode.currentColor = CircleColor.None;
-        }
     }
 
     void ReturnToStart()
